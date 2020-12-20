@@ -22,7 +22,7 @@
         </Grid.RowDefinitions>
 
         <!--Top left corner (maybe a logo?)-->
-        <Button x:Name="CloseButton" Grid.Column="0" Grid.Row="0" FontSize="32">__INCHIDE</Button>
+        <Button x:Name="CloseButton" Command="{Binding CloseCommand}" Grid.Column="0" Grid.Row="0" FontSize="32">__INCHIDE</Button>
 
         <!--Head of tables area-->
         <Border Background="Green" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Padding="5, 5, 5, 0">
