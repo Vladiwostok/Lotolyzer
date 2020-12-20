@@ -1,0 +1,6 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/Lotolyzer_main_app/Lotolyzer_main_app/bin/Debug
+/Lotolyzer_main_app/Lotolyzer_main_app/obj/Debug
