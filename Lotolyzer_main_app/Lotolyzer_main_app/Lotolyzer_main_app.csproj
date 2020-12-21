@@ -76,7 +76,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Classes\Database Stuff\DatabaseControl.cs" />
+    <Compile Include="Database Stuff\DatabaseControl.cs" />
     <Compile Include="Classes\RelayCommand.cs" />
     <Compile Include="Classes\ViewModels\BaseViewModel.cs" />
     <Compile Include="Classes\ViewModels\MainMenuViewModel.cs" />
@@ -133,17 +133,17 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Classes\Database Stuff\LotolyzerDatabase.mdf">
+    <Content Include="Database Stuff\LotolyzerDatabase.mdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Classes\Database Stuff\LotolyzerDatabase_log.ldf">
+    <Content Include="Database Stuff\LotolyzerDatabase_log.ldf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <DependentUpon>LotolyzerDatabase.mdf</DependentUpon>
     </Content>
+    <Content Include="Database Stuff\SQL scripts\CreateDrawTable.sql" />
+    <Resource Include="Raw text files\lotodata.txt" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Classes\Database Stuff\SQL scripts\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Fody.6.3.0\build\Fody.targets" Condition="Exists('..\packages\Fody.6.3.0\build\Fody.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

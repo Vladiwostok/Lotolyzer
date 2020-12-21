@@ -49,14 +49,14 @@
 
         <!--Report area-->
         <Border Background="Green" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="2" Padding="5">
-            <DataGrid/>
+            <DataGrid ItemsSource="{Binding CurrentDataView}" />
         </Border>
 
         <!--Button panel-->
         <Border Grid.Row="1" Grid.RowSpan="2" Grid.Column="0" Padding="5" Background="DarkBlue">
             <StackPanel Background="DarkGray">
                 <Button x:Name="Actualizare">__Actualizare</Button>
-                <Button x:Name="Tabel_1">__Afisare Tabel1</Button>
+                <Button x:Name="Tabel_1" Command="{Binding ShowDrawTableCommand}">__Afisare Tabel1</Button>
                 <Button x:Name="Tabel_2">__Afisare Tabel2</Button>
                 <Button x:Name="TabeleDLL">__TabeleDLL</Button>
                 <Button x:Name="GetDir">__GetDir</Button>
