@@ -76,7 +76,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Database Stuff\DatabaseControl.cs" />
+    <Compile Include="Classes\Database classes\DrawAnalysis.cs" />
+    <Compile Include="Classes\Website related classes\DrawURL.cs" />
+    <Compile Include="Classes\Website related classes\HTMLSource.cs" />
+    <Compile Include="Classes\Database classes\DatabaseControl.cs" />
     <Compile Include="Classes\RelayCommand.cs" />
     <Compile Include="Classes\ViewModels\BaseViewModel.cs" />
     <Compile Include="Classes\ViewModels\MainMenuViewModel.cs" />

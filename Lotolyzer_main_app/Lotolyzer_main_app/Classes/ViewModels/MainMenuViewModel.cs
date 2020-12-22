@@ -16,7 +16,6 @@ namespace Lotolyzer_main_app
 
         public DataView CurrentDataView { get; set; }
         public DataTable CurrentDataTable { get; set; }
-        public DataGrid CurrentDataGrid { get; set; }
 
         #region Constructor
 
@@ -37,8 +36,7 @@ namespace Lotolyzer_main_app
         private void CloseApp()
         {
             // This needs to be changed
-            System.Threading.Tasks.Task.Run(() => MessageBox.Show("Closing...Please be patient"));
-            System.Threading.Thread.Sleep(500);
+            DatabaseControl.CloseConnection();
             Application.Current.MainWindow.Close();
         }
 
@@ -47,11 +45,10 @@ namespace Lotolyzer_main_app
         /// </summary>
         private void ShowDrawTable()
         {
-            MessageBox.Show("merge");
-            //CurrentDataView = DatabaseControl.GetDataTable("SELECT * FROM DrawTable ORDER BY [Numarul extragerii] DESC").DefaultView;
             CurrentDataTable = DatabaseControl.GetDataTable("SELECT * FROM DrawTable");
             CurrentDataView = CurrentDataTable.DefaultView;
-            //CurrentDataGrid.DataContext = CurrentDataTable.DefaultView;
+
+            DrawAnalysis.ParseArchiveDraw(DrawURL.BaseDrawArchiveURL + "1993");
         }
     }
 }
