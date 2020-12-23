@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -33,11 +34,27 @@ namespace Lotolyzer_main_app
         /// <summary>
         /// Closes the app correctly, shutting down the database
         /// </summary>
-        private void CloseApp()
+        private async void CloseApp()
         {
             // This needs to be changed
-            DatabaseControl.CloseConnection();
+
+            await Task.Run(() =>
+           {
+               Task.Run(() =>
+               {
+                   MessageBox.Show("Closing, please be patient...");
+               });
+
+               Task.Run(() =>
+               {
+                   DatabaseControl.CloseConnection();
+               });
+           });
+
+            await Task.Delay(500);
+
             Application.Current.MainWindow.Close();
+
         }
 
         /// <summary>

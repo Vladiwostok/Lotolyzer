@@ -144,6 +144,8 @@
       <DependentUpon>LotolyzerDatabase.mdf</DependentUpon>
     </Content>
     <Content Include="Database Stuff\SQL scripts\CreateDrawTable.sql" />
+    <Content Include="Database Stuff\SQL scripts\CreateMainTable.sql" />
+    <Content Include="Database Stuff\SQL scripts\CreateNumberTable.sql" />
     <Resource Include="Raw text files\lotodata.txt" />
   </ItemGroup>
   <ItemGroup />
