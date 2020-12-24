@@ -59,7 +59,7 @@
                 <Button Command="{Binding ShowDrawTableCommand}">Show Draw Table</Button>
                 <Button>__Afisare Tabel2</Button>
                 <Button>__TabeleDLL</Button>
-                <Button Click="Button_Click">__GetDir</Button>
+                <Button Click="Button_Click">MAGIC DEBUG BUTTON</Button>
                 <Button>__Tabel</Button>
                 <Button>__HTMLEXTRACT</Button>
             </StackPanel>

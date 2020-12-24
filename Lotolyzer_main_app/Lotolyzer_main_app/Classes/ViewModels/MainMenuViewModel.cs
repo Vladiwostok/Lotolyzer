@@ -64,9 +64,7 @@ namespace Lotolyzer_main_app
         /// </summary>
         private void ShowMainTable()
         {
-
-
-            CurrentDataTable = DatabaseControl.GetDataTable("SELECT * FROM MainTable");
+            CurrentDataTable = DatabaseControl.GetDataTable("SET DATEFORMAT DMY; SELECT * FROM MainTable");
             CurrentDataView = CurrentDataTable.DefaultView;
         }
 

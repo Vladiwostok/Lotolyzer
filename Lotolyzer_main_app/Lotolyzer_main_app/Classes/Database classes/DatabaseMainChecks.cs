@@ -34,7 +34,7 @@ namespace Lotolyzer_main_app
                 throw new FileNotFoundException($"File not found : {bulkDataFile}");
 
             // Insert the whole file into the main table
-            DatabaseControl.ExecuteQuery("BULK INSERT dbo.MainTable FROM '" + bulkDataFile + "' WITH(FIELDTERMINATOR = ' ')");
+            DatabaseControl.ExecuteQuery("SET DATEFORMAT DMY; BULK INSERT dbo.MainTable FROM '" + bulkDataFile + "' WITH(FIELDTERMINATOR = ' ')");
         }
 
         /// <summary>
