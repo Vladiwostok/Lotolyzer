@@ -57,8 +57,8 @@
             <StackPanel Background="DarkGray">
                 <Button Command="{Binding ShowMainTableCommand}">Show Main Table</Button>
                 <Button Command="{Binding ShowDrawTableCommand}">Show Draw Table</Button>
-                <Button>__Afisare Tabel2</Button>
-                <Button>__TabeleDLL</Button>
+                <Button Command="{Binding ShowNumberTableCommand}">Show Number Table</Button>
+                <Button Command="{Binding ResetDatabaseCommand}">Reset Database (BE CAREFUL)</Button>
                 <Button Click="Button_Click">MAGIC DEBUG BUTTON</Button>
                 <Button>__Tabel</Button>
                 <Button>__HTMLEXTRACT</Button>

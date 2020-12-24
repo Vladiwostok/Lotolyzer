@@ -76,7 +76,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Classes\Database classes\DatabaseMainChecks.cs" />
+    <Compile Include="Classes\Database classes\MainDatabaseTools.cs" />
     <Compile Include="Classes\Database classes\DatabaseScripts.cs" />
     <Compile Include="Classes\Database classes\DrawAnalysis.cs" />
     <Compile Include="Classes\Website related classes\DrawURL.cs" />

@@ -13,8 +13,12 @@ namespace Lotolyzer_main_app
     class MainMenuViewModel : BaseViewModel
     {
         public ICommand CloseCommand { get; set; }
-        public ICommand ShowDrawTableCommand { get; set; }
+
+        public ICommand ResetDatabaseCommand { get; set; }
+
         public ICommand ShowMainTableCommand { get; set; }
+        public ICommand ShowDrawTableCommand { get; set; }
+        public ICommand ShowNumberTableCommand { get; set; }
 
         public DataView CurrentDataView { get; set; }
         public DataTable CurrentDataTable { get; set; }
@@ -27,33 +31,26 @@ namespace Lotolyzer_main_app
         public MainMenuViewModel()
         {
             this.CloseCommand = new RelayCommand(() => CloseApp(), true);
-            this.ShowDrawTableCommand = new RelayCommand(() => ShowDrawTable(), true);
+
+            this.ResetDatabaseCommand = new RelayCommand(() => ResetDatabase(), true);
+
             this.ShowMainTableCommand = new RelayCommand(() => ShowMainTable(), true);
+            this.ShowDrawTableCommand = new RelayCommand(() => ShowDrawTable(), true);
+            this.ShowNumberTableCommand = new RelayCommand(() => ShowNumberTable(), true);
         }
 
         #endregion
 
+        // Change this
         /// <summary>
         /// Closes the app correctly, shutting down the database
         /// </summary>
         private async void CloseApp()
         {
-            // This needs to be changed
-
             await Task.Run(() =>
            {
-               Task.Run(() =>
-               {
-                   MessageBox.Show("Closing, please be patient...");
-               });
-
-               Task.Run(() =>
-               {
-                   DatabaseControl.CloseConnection();
-               });
+                DatabaseControl.CloseConnection();
            });
-
-            await Task.Delay(500);
 
             Application.Current.MainWindow.Close();
 
@@ -64,8 +61,11 @@ namespace Lotolyzer_main_app
         /// </summary>
         private void ShowMainTable()
         {
-            CurrentDataTable = DatabaseControl.GetDataTable("SET DATEFORMAT DMY; SELECT * FROM MainTable");
-            CurrentDataView = CurrentDataTable.DefaultView;
+            Task.Run(() =>
+           {
+               CurrentDataTable = DatabaseControl.GetDataTable("SELECT * FROM MainTable");
+               CurrentDataView = CurrentDataTable.DefaultView;
+           });
         }
 
         /// <summary>
@@ -73,10 +73,34 @@ namespace Lotolyzer_main_app
         /// </summary>
         private void ShowDrawTable()
         {
-            CurrentDataTable = DatabaseControl.GetDataTable("SELECT * FROM DrawTable");
-            CurrentDataView = CurrentDataTable.DefaultView;
+            Task.Run(() =>
+            {
+                CurrentDataTable = DatabaseControl.GetDataTable("SELECT * FROM DrawTable");
+                CurrentDataView = CurrentDataTable.DefaultView;
+            });
+        }
 
-            //DrawAnalysis.ParseArchiveDraw(DrawURL.BaseDrawArchiveURL + "1993");
+        /// <summary>
+        /// Shows the number table
+        /// </summary>
+        private void ShowNumberTable()
+        {
+            Task.Run(() =>
+            {
+                CurrentDataTable = DatabaseControl.GetDataTable("SELECT * FROM NumberTable");
+                CurrentDataView = CurrentDataTable.DefaultView;
+            });
+        }
+
+        /// <summary>
+        /// Resets the database
+        /// </summary>
+        private void ResetDatabase()
+        {
+            Task.Run(() =>
+            {
+                MainDatabaseTools.FullReset();
+            });
         }
     }
 }
