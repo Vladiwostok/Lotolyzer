@@ -22,7 +22,7 @@
         </Grid.RowDefinitions>
 
         <!--Top left corner (maybe a logo?)-->
-        <Button Command="{Binding CloseCommand}" Grid.Column="0" Grid.Row="0" FontSize="32">__INCHIDE</Button>
+        <Button Command="{Binding CloseCommand}" Grid.Column="0" Grid.Row="0" FontSize="32">Close</Button>
 
         <!--Head of tables area-->
         <Border Background="Green" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Padding="5, 5, 5, 0">
@@ -55,11 +55,11 @@
         <!--Button panel-->
         <Border Grid.Row="1" Grid.RowSpan="2" Grid.Column="0" Padding="5" Background="DarkBlue">
             <StackPanel Background="DarkGray">
-                <Button>__Actualizare</Button>
-                <Button Command="{Binding ShowDrawTableCommand}">__Afisare Tabel1</Button>
+                <Button Command="{Binding ShowMainTableCommand}">Show Main Table</Button>
+                <Button Command="{Binding ShowDrawTableCommand}">Show Draw Table</Button>
                 <Button>__Afisare Tabel2</Button>
                 <Button>__TabeleDLL</Button>
-                <Button>__GetDir</Button>
+                <Button Click="Button_Click">__GetDir</Button>
                 <Button>__Tabel</Button>
                 <Button>__HTMLEXTRACT</Button>
             </StackPanel>

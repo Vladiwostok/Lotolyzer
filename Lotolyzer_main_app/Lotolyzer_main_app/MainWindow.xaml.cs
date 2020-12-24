@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 
 namespace Lotolyzer_main_app
 {
@@ -12,6 +13,19 @@ namespace Lotolyzer_main_app
             InitializeComponent();
 
             this.DataContext = new MainMenuViewModel();
+        }
+
+        // Delete this
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            //try
+            //{
+                DatabaseMainChecks.FullReset();
+            //}
+            //catch (Exception ee)
+            //{
+                //MessageBox.Show(ee.Message);
+            //}
         }
     }
 }

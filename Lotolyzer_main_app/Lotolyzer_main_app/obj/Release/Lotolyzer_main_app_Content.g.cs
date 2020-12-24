@@ -8,8 +8,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("database%20stuff/lotolyzerdatabase.mdf")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("database%20stuff/lotolyzerdatabase_log.ldf")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("database%20stuff/sql%20scripts/createdrawtable.sql")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("database/lotolyzerdatabase.mdf")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("database/lotolyzerdatabase_log.ldf")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("database/sql%20scripts/createdrawtable.sql")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("database/sql%20scripts/createmaintable.sql")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("database/sql%20scripts/createnumbertable.sql")]
 
 

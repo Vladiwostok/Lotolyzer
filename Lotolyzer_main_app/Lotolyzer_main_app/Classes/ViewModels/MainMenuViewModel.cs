@@ -14,6 +14,7 @@ namespace Lotolyzer_main_app
     {
         public ICommand CloseCommand { get; set; }
         public ICommand ShowDrawTableCommand { get; set; }
+        public ICommand ShowMainTableCommand { get; set; }
 
         public DataView CurrentDataView { get; set; }
         public DataTable CurrentDataTable { get; set; }
@@ -27,6 +28,7 @@ namespace Lotolyzer_main_app
         {
             this.CloseCommand = new RelayCommand(() => CloseApp(), true);
             this.ShowDrawTableCommand = new RelayCommand(() => ShowDrawTable(), true);
+            this.ShowMainTableCommand = new RelayCommand(() => ShowMainTable(), true);
         }
 
         #endregion
@@ -58,6 +60,17 @@ namespace Lotolyzer_main_app
         }
 
         /// <summary>
+        /// Shows the main table
+        /// </summary>
+        private void ShowMainTable()
+        {
+
+
+            CurrentDataTable = DatabaseControl.GetDataTable("SELECT * FROM MainTable");
+            CurrentDataView = CurrentDataTable.DefaultView;
+        }
+
+        /// <summary>
         /// Shows the draw table
         /// </summary>
         private void ShowDrawTable()
@@ -65,7 +78,7 @@ namespace Lotolyzer_main_app
             CurrentDataTable = DatabaseControl.GetDataTable("SELECT * FROM DrawTable");
             CurrentDataView = CurrentDataTable.DefaultView;
 
-            DrawAnalysis.ParseArchiveDraw(DrawURL.BaseDrawArchiveURL + "1993");
+            //DrawAnalysis.ParseArchiveDraw(DrawURL.BaseDrawArchiveURL + "1993");
         }
     }
 }

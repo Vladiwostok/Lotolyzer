@@ -13,18 +13,13 @@ namespace Lotolyzer_main_app
         /// <summary>
         /// The path to the database
         /// </summary>
-        //
-        // This needs to be changed
-        //
         public static string Path = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=" +
-            "C:\\Users\\riciu\\Documents\\Lotolyzer\\Lotolyzer_main_app\\Lotolyzer_main_app\\Database Stuff" + "\\LotolyzerDatabase.mdf;Integrated Security=True";
-
-        /// <summary>
-        /// The connection to the database
-        /// </summary>
-        public static SqlConnection DataBaseConnection = new SqlConnection(Path);
+            System.AppDomain.CurrentDomain.BaseDirectory +
+            "Resources\\Database\\LotolyzerDatabase.mdf;Integrated Security=True";
 
         #endregion
+
+        #region Query methods
 
         /// <summary>
         /// Extracts a data table based on a given query
@@ -33,13 +28,19 @@ namespace Lotolyzer_main_app
         /// <returns>The data table with the queried information</returns>
         public static DataTable GetDataTable(string Query)
         {
-            OpenConnection();
+            // Open a connection to the database
+            SqlConnection connection = OpenConnection();
 
-            SqlDataAdapter adapter = new SqlDataAdapter(Query, DataBaseConnection);
+            // Prepare the adapter
+            SqlDataAdapter adapter = new SqlDataAdapter(Query, connection);
+
+            // The data table to be returned
             DataTable table = new DataTable();
 
+            // Fill the data table
             adapter.Fill(table);
 
+            // Close the connection after finishing
             CloseConnection();
 
             return table;
@@ -51,26 +52,59 @@ namespace Lotolyzer_main_app
         /// <param name="Query">The query to execute</param>
         public static void ExecuteQuery(string Query)
         {
-            OpenConnection();
+            // The connection to the database
+            SqlConnection connection = OpenConnection();
 
-            SqlCommand command = new SqlCommand(Query, DataBaseConnection);
+            // The command to be executed
+            SqlCommand command = new SqlCommand(Query, connection);
+
+            // Execute the command
             command.ExecuteNonQuery();
 
+            // Close the connection after finishing
             CloseConnection();
         }
 
-        #region Helper functions
+        /// <summary>
+        /// Executes a given query and returns it's result
+        /// </summary>
+        /// <param name="Query">The query to be executed</param>
+        /// <returns>The result of the query</returns>
+        public static int ExecuteResultQuery(string Query)
+        {
+            // The connection to the database
+            SqlConnection connection = OpenConnection();
+
+            // The command to be executed
+            SqlCommand command = new SqlCommand(Query, connection);
+
+            // Execute the query and save the result
+            int result = (int)command.ExecuteScalar();
+
+            // Close the connection after finishing
+            CloseConnection();
+
+            return result;
+        }
+
+        #endregion
+
+        #region Connection methods
 
         /// <summary>
         /// Opens the connection to the database
         /// </summary>
-        /// <returns></returns>
-        public static void OpenConnection()
+        /// <returns>The openned connection to the database</returns>
+        public static SqlConnection OpenConnection()
         {
-            if (DataBaseConnection.State == ConnectionState.Open)
-                return;
+            // The connection to the database
+            var connection = new SqlConnection(Path);
 
-            DataBaseConnection.Open();
+            // Check if the connection is already open, and if not, open it
+            if (connection.State != ConnectionState.Open)
+                connection.Open();
+
+            return connection;
         }
 
         /// <summary>
@@ -78,10 +112,12 @@ namespace Lotolyzer_main_app
         /// </summary>
         public static void CloseConnection()
         {
-            if (DataBaseConnection.State == ConnectionState.Closed)
-                return;
+            // The connection to the database
+            var connection = new SqlConnection(Path);
 
-            DataBaseConnection.Close();
+            // Check if the connection is closed, and if not, close it
+            if (connection.State != ConnectionState.Closed)
+                connection.Close();
         }
 
         #endregion

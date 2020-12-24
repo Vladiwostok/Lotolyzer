@@ -76,12 +76,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Classes\Database classes\DatabaseMainChecks.cs" />
+    <Compile Include="Classes\Database classes\DatabaseScripts.cs" />
     <Compile Include="Classes\Database classes\DrawAnalysis.cs" />
     <Compile Include="Classes\Website related classes\DrawURL.cs" />
     <Compile Include="Classes\Website related classes\HTMLSource.cs" />
     <Compile Include="Classes\Database classes\DatabaseControl.cs" />
-    <Compile Include="Classes\RelayCommand.cs" />
-    <Compile Include="Classes\ViewModels\BaseViewModel.cs" />
+    <Compile Include="Classes\ViewModels\Base\RelayCommand.cs" />
+    <Compile Include="Classes\ViewModels\Base\BaseViewModel.cs" />
     <Compile Include="Classes\ViewModels\MainMenuViewModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -136,17 +138,43 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Database Stuff\LotolyzerDatabase.mdf">
+    <Content Include="Resources\Database\LotolyzerDatabase.mdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Database Stuff\LotolyzerDatabase_log.ldf">
+    <Content Include="Resources\Database\LotolyzerDatabase_log.ldf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <DependentUpon>LotolyzerDatabase.mdf</DependentUpon>
     </Content>
-    <Content Include="Database Stuff\SQL scripts\CreateDrawTable.sql" />
-    <Content Include="Database Stuff\SQL scripts\CreateMainTable.sql" />
-    <Content Include="Database Stuff\SQL scripts\CreateNumberTable.sql" />
-    <Resource Include="Raw text files\lotodata.txt" />
+    <Content Include="Resources\Database\SQL scripts\DeleteDrawTable.sql">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Database\SQL scripts\CheckDrawTable.sql">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Database\SQL scripts\DeleteMainTable.sql">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Database\SQL scripts\CheckMainTable.sql">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Database\SQL scripts\DeleteNumberTable.sql">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Database\SQL scripts\CheckNumberTable.sql">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Database\SQL scripts\CreateDrawTable.sql">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Database\SQL scripts\CreateMainTable.sql">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Database\SQL scripts\CreateNumberTable.sql">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Raw text files\MainTable.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
