@@ -17,7 +17,10 @@ namespace Lotolyzer_main_app
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            MainDatabaseTools.InsertTables();
+            System.Threading.Tasks.Task.Run(() =>
+            {
+                MainDatabaseTools.InsertTables();
+            });            
         }
     }
 }

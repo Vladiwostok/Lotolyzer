@@ -116,12 +116,16 @@ namespace Lotolyzer_main_app
             var dataTable = DatabaseControl.GetDataTable("SELECT * FROM MainTable");
 
             int[] freq = new int[50];
-            int[] lastfreq = new int[50];
+            int[] currentDelay = new int[50];
+            int[] biggestDelay = new int[50];
             int lastDraw = 0;
 
             foreach(DataRow row in dataTable.Rows)
             {
                 lastDraw++;
+
+                for (int i = 1; i < 50; i++)
+                    currentDelay[i]++;
 
                 int id = (int)row.ItemArray[0];
 
@@ -139,6 +143,13 @@ namespace Lotolyzer_main_app
                     linenum[(nums[idx] - 1) / 10]++;
 
                     colnum[nums[idx] % 10]++;
+
+                    freq[nums[idx]]++;
+
+                    if (currentDelay[nums[idx]] - 1 > biggestDelay[nums[idx]])
+                        biggestDelay[nums[idx]] = currentDelay[nums[idx]] - 1;
+
+                    currentDelay[nums[idx]] = 0;
                 }
 
                 // Move this out of here
@@ -160,6 +171,13 @@ namespace Lotolyzer_main_app
                     }
                 }
             }
+
+            double[] avgDelay = new double[50];
+
+            for (int i = 1; i < 50; i++)
+                avgDelay[i] = (double)freq[i] / lastDraw;
+
+            System.Windows.MessageBox.Show(lastDraw.ToString());
         }
 
         #endregion
