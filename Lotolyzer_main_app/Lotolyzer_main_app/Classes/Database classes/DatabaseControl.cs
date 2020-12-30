@@ -41,7 +41,7 @@ namespace Lotolyzer_main_app
             adapter.Fill(table);
 
             // Close the connection after finishing
-            CloseConnection();
+            CloseConnection(connection);
 
             return table;
         }
@@ -62,7 +62,7 @@ namespace Lotolyzer_main_app
             command.ExecuteNonQuery();
 
             // Close the connection after finishing
-            CloseConnection();
+            CloseConnection(connection);
         }
 
         /// <summary>
@@ -82,9 +82,31 @@ namespace Lotolyzer_main_app
             int result = (int)command.ExecuteScalar();
 
             // Close the connection after finishing
-            CloseConnection();
+            CloseConnection(connection);
 
             return result;
+        }
+
+        public static void InsertRow(string TableName, object[] Data)
+        {
+            // Abort if the given data row is null or empty
+            if (Data.Length == 0 || Data == null)
+                return;
+
+            // Make a string with the constant query
+            string query = "SET DATEFORMAT DMY; INSERT INTO \"" + TableName + "\" VALUES(";
+
+            // Add each value from data in the query
+            foreach (object item in Data)
+                query += "\'" + item.ToString() + "\'" + ",";
+
+            // Remove the last ','
+            query = query.Remove(query.Length - 1);
+
+            // Finish building the query
+            query += ");";
+
+            ExecuteQuery(query);
         }
 
         #endregion
@@ -110,14 +132,14 @@ namespace Lotolyzer_main_app
         /// <summary>
         /// Closes the connection to the database
         /// </summary>
-        public static void CloseConnection()
+        public static void CloseConnection(SqlConnection Connection)
         {
             // The connection to the database
-            var connection = new SqlConnection(Path);
+            //var connection = new SqlConnection(Path);
 
             // Check if the connection is closed, and if not, close it
-            if (connection.State != ConnectionState.Closed)
-                connection.Close();
+            if (Connection.State != ConnectionState.Closed)
+                Connection.Close();
         }
 
         #endregion

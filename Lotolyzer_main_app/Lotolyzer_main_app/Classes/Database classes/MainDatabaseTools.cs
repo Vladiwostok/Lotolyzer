@@ -109,75 +109,50 @@ namespace Lotolyzer_main_app
         }
 
         /// <summary>
-        /// Inserts the required data into 
+        /// Inserts the required data into the tables
         /// </summary>
         public static void InsertTables()
         {
             var dataTable = DatabaseControl.GetDataTable("SELECT * FROM MainTable");
 
-            int[] freq = new int[50];
-            int[] currentDelay = new int[50];
-            int[] biggestDelay = new int[50];
+            NumberAnalysis numberAnalysis = new NumberAnalysis();
+
             int lastDraw = 0;
 
             foreach(DataRow row in dataTable.Rows)
             {
+                numberAnalysis.Update(row);
+
                 lastDraw++;
 
-                for (int i = 1; i < 50; i++)
-                    currentDelay[i]++;
+                DrawAnalysis drawAnalysis = new DrawAnalysis(row);
 
-                int id = (int)row.ItemArray[0];
+                drawAnalysis.Analyze();
 
-                System.DateTime date = (System.DateTime)row.ItemArray[1];
-
-                // The default values are 0
-                int[] nums = new int[6];
-                int[] linenum = new int[5];
-                int[] colnum = new int[10];
-
-                for (int idx = 0; idx < 6; idx++)
-                {
-                    nums[idx] = (byte)row.ItemArray[2 + idx];
-
-                    linenum[(nums[idx] - 1) / 10]++;
-
-                    colnum[nums[idx] % 10]++;
-
-                    freq[nums[idx]]++;
-
-                    if (currentDelay[nums[idx]] - 1 > biggestDelay[nums[idx]])
-                        biggestDelay[nums[idx]] = currentDelay[nums[idx]] - 1;
-
-                    currentDelay[nums[idx]] = 0;
-                }
-
-                // Move this out of here
-                using (System.Data.SqlClient.SqlConnection connection = DatabaseControl.OpenConnection())
-                {
-                    string query1 = "INSERT INTO DrawTable ([Draw Number], [Draw Date], [N1], [N2], [N3], [N4], [N5], [N6]) values(@id,@date,@n1,@n2,@n3,@n4,@n5,@n6)";
-                    using (System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand(query1, connection))
-                    {
-                        cmd.Parameters.Add("@id", SqlDbType.Int).Value = id;
-                        cmd.Parameters.Add("@date", SqlDbType.Date).Value = date;
-                        cmd.Parameters.Add("@n1", SqlDbType.TinyInt).Value = nums[0];
-                        cmd.Parameters.Add("@n2", SqlDbType.TinyInt).Value = nums[1];
-                        cmd.Parameters.Add("@n3", SqlDbType.TinyInt).Value = nums[2];
-                        cmd.Parameters.Add("@n4", SqlDbType.TinyInt).Value = nums[3];
-                        cmd.Parameters.Add("@n5", SqlDbType.TinyInt).Value = nums[4];
-                        cmd.Parameters.Add("@n6", SqlDbType.TinyInt).Value = nums[5];
-
-                        cmd.ExecuteNonQuery();
-                    }
-                }
+                DatabaseControl.InsertRow("DrawTable", drawAnalysis.DrawRow);
             }
 
-            double[] avgDelay = new double[50];
+            for (int number = 1; number < 50; number++)
+            {
+                object[] temp = new object[6];
 
-            for (int i = 1; i < 50; i++)
-                avgDelay[i] = (double)freq[i] / lastDraw;
+                // Id and frequency
+                for (int idx = 0; idx < 2; idx++)
+                    temp[idx] = numberAnalysis.NumberRow[number, idx];
 
-            System.Windows.MessageBox.Show(lastDraw.ToString());
+                // Frequency %
+                temp[2] = 100 * (double)numberAnalysis.NumberRow[number, 1] / numberAnalysis.LastDraw;
+
+                // Last delay
+                temp[3] = numberAnalysis.NumberRow[number, 2];
+                // Max delays
+                temp[4] = numberAnalysis.NumberRow[number, 3];
+
+                // Average delay
+                temp[5] = (double)numberAnalysis.NumberRow[number, 4] / (double)numberAnalysis.NumberRow[number, 5];
+
+                DatabaseControl.InsertRow("NumberTable", temp);
+            }
         }
 
         #endregion

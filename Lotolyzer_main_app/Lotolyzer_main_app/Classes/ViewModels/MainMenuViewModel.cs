@@ -47,10 +47,10 @@ namespace Lotolyzer_main_app
         /// </summary>
         private async void CloseApp()
         {
-            await Task.Run(() =>
-           {
-                DatabaseControl.CloseConnection();
-           });
+           // await Task.Run(() =>
+           //{
+           //     DatabaseControl.CloseConnection();
+           //});
 
             Application.Current.MainWindow.Close();
 
@@ -63,8 +63,17 @@ namespace Lotolyzer_main_app
         {
             Task.Run(() =>
            {
-               CurrentDataTable = DatabaseControl.GetDataTable("SELECT * FROM MainTable");
-               CurrentDataView = CurrentDataTable.DefaultView;
+               CurrentDataTable = DatabaseControl.GetDataTable("SELECT * FROM MainTable ORDER BY Id DESC");
+               DataTable cloned = CurrentDataTable.Clone();
+               cloned.Columns[1].DataType = typeof(string);
+               
+               foreach(DataRow row in CurrentDataTable.Rows)
+                   cloned.ImportRow(row);
+
+               foreach (DataRow row in cloned.Rows)
+                   row[1] = ((string)row[1]).Remove(((string)row[1]).IndexOf(' '));
+
+               CurrentDataView = cloned.DefaultView;
            });
         }
 
@@ -75,8 +84,17 @@ namespace Lotolyzer_main_app
         {
             Task.Run(() =>
             {
-                CurrentDataTable = DatabaseControl.GetDataTable("SELECT * FROM DrawTable");
-                CurrentDataView = CurrentDataTable.DefaultView;
+                CurrentDataTable = DatabaseControl.GetDataTable("SELECT * FROM DrawTable ORDER BY 'Draw Number' DESC");
+                DataTable cloned = CurrentDataTable.Clone();
+                cloned.Columns[1].DataType = typeof(string);
+
+                foreach (DataRow row in CurrentDataTable.Rows)
+                    cloned.ImportRow(row);
+
+                foreach (DataRow row in cloned.Rows)
+                    row[1] = ((string)row[1]).Remove(((string)row[1]).IndexOf(' '));
+
+                CurrentDataView = cloned.DefaultView;
             });
         }
 
