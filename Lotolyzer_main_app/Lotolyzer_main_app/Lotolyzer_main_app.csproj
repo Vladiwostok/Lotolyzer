@@ -82,8 +82,6 @@
     <Compile Include="Classes\Database classes\MainDatabaseTools.cs" />
     <Compile Include="Classes\Database classes\DatabaseScripts.cs" />
     <Compile Include="Classes\Database classes\NumberAnalysis.cs" />
-    <Compile Include="Classes\Website related classes\DrawURL.cs" />
-    <Compile Include="Classes\Website related classes\HTMLSource.cs" />
     <Compile Include="Classes\Database classes\DatabaseControl.cs" />
     <Compile Include="Classes\ViewModels\Base\RelayCommand.cs" />
     <Compile Include="Classes\ViewModels\Base\BaseViewModel.cs" />
