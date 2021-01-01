@@ -41,6 +41,9 @@ namespace Lotolyzer_main_app
 
             // Insert the whole file into the main table
             DatabaseControl.ExecuteQuery("SET DATEFORMAT DMY; BULK INSERT dbo.MainTable FROM '" + bulkDataFile + "' WITH(FIELDTERMINATOR = ' ')");
+
+            // Calculate the DrawTable and NumberTable
+            InsertTables();
         }
 
         #region Helper methods
@@ -117,13 +120,10 @@ namespace Lotolyzer_main_app
 
             NumberAnalysis numberAnalysis = new NumberAnalysis();
 
-            int lastDraw = 0;
-
+            // Calculate and instert each row in draw table
             foreach(DataRow row in dataTable.Rows)
             {
                 numberAnalysis.Update(row);
-
-                lastDraw++;
 
                 DrawAnalysis drawAnalysis = new DrawAnalysis(row);
 
@@ -132,6 +132,7 @@ namespace Lotolyzer_main_app
                 DatabaseControl.InsertRow("DrawTable", drawAnalysis.DrawRow);
             }
 
+            // Insert the number table
             for (int number = 1; number < 50; number++)
             {
                 object[] temp = new object[6];

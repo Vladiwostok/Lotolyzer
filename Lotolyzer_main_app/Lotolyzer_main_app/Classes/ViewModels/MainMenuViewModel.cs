@@ -41,19 +41,12 @@ namespace Lotolyzer_main_app
 
         #endregion
 
-        // Change this
         /// <summary>
-        /// Closes the app correctly, shutting down the database
+        /// Closes the app
         /// </summary>
-        private async void CloseApp()
+        private void CloseApp()
         {
-           // await Task.Run(() =>
-           //{
-           //     DatabaseControl.CloseConnection();
-           //});
-
             Application.Current.MainWindow.Close();
-
         }
 
         /// <summary>
@@ -117,7 +110,16 @@ namespace Lotolyzer_main_app
         {
             Task.Run(() =>
             {
-                MainDatabaseTools.FullReset();
+                try
+                {
+                    MainDatabaseTools.FullReset();
+                    MessageBox.Show("Reset complete!");
+                }
+                catch(Exception e)
+                {
+                    MessageBox.Show(e.Message);
+                }
+                
             });
         }
     }

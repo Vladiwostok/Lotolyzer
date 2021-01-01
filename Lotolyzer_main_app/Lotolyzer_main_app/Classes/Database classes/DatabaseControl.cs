@@ -87,6 +87,11 @@ namespace Lotolyzer_main_app
             return result;
         }
 
+        /// <summary>
+        /// Insterts an array of objects into the database
+        /// </summary>
+        /// <param name="TableName">The name of the table to insert into</param>
+        /// <param name="Data">The array containing the data to be insterted</param>
         public static void InsertRow(string TableName, object[] Data)
         {
             // Abort if the given data row is null or empty
@@ -134,9 +139,6 @@ namespace Lotolyzer_main_app
         /// </summary>
         public static void CloseConnection(SqlConnection Connection)
         {
-            // The connection to the database
-            //var connection = new SqlConnection(Path);
-
             // Check if the connection is closed, and if not, close it
             if (Connection.State != ConnectionState.Closed)
                 Connection.Close();
