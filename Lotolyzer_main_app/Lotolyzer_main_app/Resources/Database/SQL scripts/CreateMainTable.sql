@@ -1,0 +1,12 @@
+﻿CREATE TABLE [dbo].[MainTable] (
+    [Id]   INT     NOT NULL,
+    [Date] DATE    NOT NULL,
+    [N1]   TINYINT NOT NULL,
+    [N2]   TINYINT NOT NULL,
+    [N3]   TINYINT NOT NULL,
+    [N4]   TINYINT NOT NULL,
+    [N5]   TINYINT NOT NULL,
+    [N6]   TINYINT NOT NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+
