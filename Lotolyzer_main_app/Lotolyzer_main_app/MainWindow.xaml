@@ -27,22 +27,10 @@
         <!--Head of tables area-->
         <Border Background="Green" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Padding="5, 5, 5, 0">
             <Grid Background="DarkBlue">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="2*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
 
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="40">
+                    Version 0.1
+                </TextBlock>
 
             </Grid>
         </Border>
